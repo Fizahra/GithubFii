@@ -2,6 +2,7 @@ package com.fizahra.githubfii
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import androidx.activity.viewModels
 import com.bumptech.glide.Glide
 import com.fizahra.githubfii.adapter.SectionsPagerAdapter
@@ -23,6 +24,7 @@ class DetailUserActivity : AppCompatActivity() {
         val dataUser = intent.getParcelableExtra<UserResponse.User>("username")
         val username = dataUser?.login
         print("ini username ak : $username")
+        Log.d(username,"ini username ak : $username")
 
         if(username != null){
             detailViewModel.getDetail(username)
