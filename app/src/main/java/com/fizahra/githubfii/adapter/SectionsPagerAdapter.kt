@@ -10,9 +10,9 @@ import com.fizahra.githubfii.FollowersFragment
 import com.fizahra.githubfii.FollowingFragment
 import com.fizahra.githubfii.R
 
-class SectionsPagerAdapter(private val ctx: Context, fragmanager: FragmentManager, data: Bundle) : FragmentPagerAdapter(fragmanager, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT) {
+class SectionsPagerAdapter(private val ctx: Context, fragmanager: FragmentManager, data: String?) : FragmentPagerAdapter(fragmanager, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT) {
 
-    private var fragBundle : Bundle
+    private var fragBundle : String?
 
     @StringRes
     private val tabTitle = intArrayOf(R.string.followers, R.string.following)
@@ -24,7 +24,11 @@ class SectionsPagerAdapter(private val ctx: Context, fragmanager: FragmentManage
     override fun getCount(): Int = 2
 
     override fun getItem(position: Int): Fragment {
-        var fragment : Fragment? = null
+        var fragment: Fragment? = null
+        fragment?.arguments = Bundle().apply{
+            putString(FollowersFragment.EXTRA_USERNAME, fragBundle)
+            putString(FollowingFragment.EXTRA_USERNAME, fragBundle)
+        }
         when(position){
             0 -> fragment = FollowersFragment()
             1 -> fragment = FollowingFragment()

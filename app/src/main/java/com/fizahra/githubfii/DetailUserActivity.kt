@@ -11,9 +11,6 @@ import com.fizahra.githubfii.viewmodel.DetailViewModel
 
 class DetailUserActivity : AppCompatActivity() {
 
-    companion object{
-        const val EXTRA_USERNAME = "extra_username"
-    }
 
     private lateinit var binding : ActivityDetailUserBinding
     private val detailViewModel by viewModels<DetailViewModel>()
@@ -25,8 +22,9 @@ class DetailUserActivity : AppCompatActivity() {
 
         val dataUser = intent.getParcelableExtra<UserResponse.User>("username")
         val username = dataUser?.login
+        print("ini username ak : $username")
 
-        if(uname != null){
+        if(username != null){
             detailViewModel.getDetail(username)
         }
 
@@ -45,11 +43,7 @@ class DetailUserActivity : AppCompatActivity() {
             }
         }
 
-        val uname = intent.getStringExtra(EXTRA_USERNAME)
-        val bundle = Bundle()
-        bundle.putString(EXTRA_USERNAME, uname)
-
-        val sectionPagerAdapter = SectionsPagerAdapter(this, supportFragmentManager, bundle)
+        val sectionPagerAdapter = SectionsPagerAdapter(this, supportFragmentManager, username)
         binding.apply{
             vpFollow.adapter = sectionPagerAdapter
             tabFollow.setupWithViewPager(vpFollow)

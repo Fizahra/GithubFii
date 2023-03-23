@@ -7,14 +7,16 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.fizahra.githubfii.adapter.FollowersAdapter
 import com.fizahra.githubfii.adapter.FollowingAdapter
 import com.fizahra.githubfii.databinding.FragmentFollowBinding
-import com.fizahra.githubfii.viewmodel.FollowersViewModel
 import com.fizahra.githubfii.viewmodel.FollowingViewModel
 
 
 class FollowingFragment : Fragment() {
+
+    companion object{
+        const val EXTRA_USERNAME = "extra_username"
+    }
 
     private var _binding: FragmentFollowBinding? = null
     private val binding get() = _binding!!
@@ -32,7 +34,7 @@ class FollowingFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val username = arguments?.getString(DetailUserActivity.EXTRA_USERNAME).toString()
+        val username = arguments?.getString(EXTRA_USERNAME) ?: ""
         adapter = FollowingAdapter()
 
         binding.apply {
