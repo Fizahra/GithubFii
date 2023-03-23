@@ -10,9 +10,13 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class FollowersViewModel : ViewModel() {
+class FollowViewModel : ViewModel(){
     private val _listFollowers = MutableLiveData<ArrayList<FollowResponse.FollowResponseItem>>()
     val listFollowers : LiveData<ArrayList<FollowResponse.FollowResponseItem>> = _listFollowers
+
+
+    private val _listFollowing = MutableLiveData<ArrayList<FollowResponse.FollowResponseItem>>()
+    val listFollowing : LiveData<ArrayList<FollowResponse.FollowResponseItem>> = _listFollowing
 
     private val _isLoading = MutableLiveData<Boolean>()
     val isLoading : LiveData<Boolean> = _isLoading
@@ -20,7 +24,7 @@ class FollowersViewModel : ViewModel() {
     fun getFollowers(username : String){
         _isLoading.value = true
         val client = ApiConfig.getApiService().getFollowers(username)
-        client.enqueue(object : Callback<FollowResponse>{
+        client.enqueue(object : Callback<FollowResponse> {
             override fun onResponse(
                 call: Call<FollowResponse>,
                 response: Response<FollowResponse>
@@ -28,6 +32,28 @@ class FollowersViewModel : ViewModel() {
                 _isLoading.value = false
                 if(response.isSuccessful){
                     _listFollowers.postValue(response.body())
+                }
+            }
+
+            override fun onFailure(call: Call<FollowResponse>, t: Throwable) {
+                _isLoading.value = false
+                t.message?.let { Log.d("onFailure : ", it) }
+            }
+
+        })
+    }
+
+    fun getFollowing(username : String){
+        _isLoading.value = true
+        val client = ApiConfig.getApiService().getFollowing(username)
+        client.enqueue(object : Callback<FollowResponse>{
+            override fun onResponse(
+                call: Call<FollowResponse>,
+                response: Response<FollowResponse>
+            ) {
+                _isLoading.value = false
+                if(response.isSuccessful){
+                    _listFollowing.postValue(response.body())
                 }
             }
 

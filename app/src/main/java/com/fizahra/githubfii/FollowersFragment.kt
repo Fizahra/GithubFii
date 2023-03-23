@@ -11,8 +11,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.fizahra.githubfii.adapter.FollowersAdapter
 import com.fizahra.githubfii.adapter.FollowingAdapter
 import com.fizahra.githubfii.databinding.FragmentFollowBinding
-import com.fizahra.githubfii.viewmodel.FollowersViewModel
-import com.fizahra.githubfii.viewmodel.FollowingViewModel
+import com.fizahra.githubfii.viewmodel.FollowViewModel
 
 
 class FollowersFragment : Fragment() {
@@ -24,10 +23,9 @@ class FollowersFragment : Fragment() {
 
     private var _binding: FragmentFollowBinding? = null
     private val binding get() = _binding!!
-    private lateinit var followerViewModel: FollowersViewModel
-    private lateinit var followerViewModels: FollowingViewModel
-    private lateinit var adapter: FollowersAdapter
-    private lateinit var adapters: FollowingAdapter
+    private lateinit var adapterFollower: FollowersAdapter
+    private lateinit var adapterFollowing: FollowingAdapter
+    private lateinit var followViewModel : FollowViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -45,45 +43,43 @@ class FollowersFragment : Fragment() {
         print("ini username ak : $username")
         Log.d(username, "ini username ak : $username")
 
-        adapter = FollowersAdapter()
-        adapters = FollowingAdapter()
+        adapterFollower = FollowersAdapter()
+        adapterFollowing = FollowingAdapter()
+        binding.apply{
+            rvFollow.setHasFixedSize(true)
+            rvFollow.layoutManager = LinearLayoutManager(activity)
+        }
 
         if(index == 0){
-            binding.apply {
-                rvFollow.setHasFixedSize(true)
-                rvFollow.layoutManager = LinearLayoutManager(activity)
-                rvFollow.adapter = adapter
-            }
-            followerViewModel = ViewModelProvider(
+            binding.rvFollow.adapter = adapterFollower
+            followViewModel = ViewModelProvider(
                 this,
                 ViewModelProvider.NewInstanceFactory()
-            ).get(FollowersViewModel::class.java)
-            followerViewModel.getFollowers(username)
-            followerViewModel.listFollowers.observe(viewLifecycleOwner) {
-                if (it != null) {
-                    adapter.setList(it)
+            ).get(FollowViewModel::class.java)
+            followViewModel.getFollowers(username)
+            followViewModel.listFollowers.observe(viewLifecycleOwner) {
+                if (it != null && it.size > 0) {
+                    binding.tvNotice.visibility = View.GONE
+                    adapterFollower.setList(it)
                 }
             }
-            followerViewModel.isLoading.observe(viewLifecycleOwner) {
+            followViewModel.isLoading.observe(viewLifecycleOwner) {
                 showLoading(it)
             }
-        } else {
-            binding.apply {
-                rvFollow.setHasFixedSize(true)
-                rvFollow.layoutManager = LinearLayoutManager(activity)
-                rvFollow.adapter = adapter
-            }
-            followerViewModels = ViewModelProvider(
+        } else{
+            binding.rvFollow.adapter = adapterFollowing
+            followViewModel = ViewModelProvider(
                 this,
                 ViewModelProvider.NewInstanceFactory()
-            ).get(FollowingViewModel::class.java)
-            followerViewModels.getFollowing(username)
-            followerViewModels.listFollowing.observe(viewLifecycleOwner) {
-                if (it != null) {
-                    adapter.setList(it)
+            ).get(FollowViewModel::class.java)
+            followViewModel.getFollowing(username)
+            followViewModel.listFollowing.observe(viewLifecycleOwner) {
+                if (it != null && it.size > 0) {
+                    binding.tvNotice.visibility = View.GONE
+                    adapterFollowing.setList(it)
                 }
             }
-            followerViewModels.isLoading.observe(viewLifecycleOwner) {
+            followViewModel.isLoading.observe(viewLifecycleOwner) {
                 showLoading(it)
             }
         }

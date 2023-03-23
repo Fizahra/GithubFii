@@ -24,7 +24,7 @@ interface ApiService {
         @Path("username") username : String
     ): Call<FollowResponse>
 
-    @GET("users/{username}/fpathollowing")
+    @GET("users/{username}/following")
     fun getFollowing(
         @Path("username") username : String
     ): Call<FollowResponse>

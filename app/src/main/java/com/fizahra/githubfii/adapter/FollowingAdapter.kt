@@ -22,7 +22,7 @@ class FollowingAdapter : RecyclerView.Adapter<FollowingAdapter.FollowingViewHold
             binding.apply {
                 tvUser.text = following.login
                 Glide.with(itemView)
-                    .load(following.login)
+                    .load(following.avatarUrl)
                     .into(imgUser)
             }
         }

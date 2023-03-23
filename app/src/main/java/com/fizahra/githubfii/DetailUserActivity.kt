@@ -3,6 +3,7 @@ package com.fizahra.githubfii
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import androidx.activity.viewModels
 import com.bumptech.glide.Glide
 import com.fizahra.githubfii.adapter.SectionsPagerAdapter
@@ -45,10 +46,22 @@ class DetailUserActivity : AppCompatActivity() {
             }
         }
 
+        detailViewModel.isLoading.observe(this) {
+            showLoading(it)
+        }
+
         val sectionPagerAdapter = SectionsPagerAdapter(this, supportFragmentManager, username)
         binding.apply{
             vpFollow.adapter = sectionPagerAdapter
             tabFollow.setupWithViewPager(vpFollow)
+        }
+    }
+
+    private fun showLoading(isLoading: Boolean) {
+        if (isLoading) {
+            binding.pbDet.visibility = View.VISIBLE
+        } else {
+            binding.pbDet.visibility = View.GONE
         }
     }
 }
