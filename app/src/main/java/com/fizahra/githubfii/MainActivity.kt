@@ -83,6 +83,11 @@ class MainActivity : AppCompatActivity() {
             this.startActivity(intent)
             return true
         }
+        if(id ==R.id.menu_setting){
+            val intent = Intent(this, SettingModeActivity::class.java)
+            this.startActivity(intent)
+            return true
+        }
         return super.onOptionsItemSelected(item)
     }
 

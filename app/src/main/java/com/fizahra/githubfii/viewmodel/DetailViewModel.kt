@@ -57,45 +57,19 @@ class DetailViewModel(application: Application) : ViewModel() {
     })
     }
 
-//    fun setFav(username: String, avatar: String, id: Int) {
-//        var user = FavUser(
-//            id,
-//            avatar,
-//            username,
-//        )
-//        user.let { viewModelScope.launch {
-//            if (isFav) {
-//                unFav(id)
-//                resultUnFav.value =true
-//                _toastMessage.value = "Remove from favorite"
-//            }else{
-//                addToFav(username, avatar, id)
-//                resultAddFav.value =true
-//                _toastMessage.value = "Add to favorite"
-//            }
-//
-//        }
-//            isFav = !isFav
-//        }
-
-
-//    }
     fun addToFav(username: String, avatar: String, id: Int){
         viewModelScope.launch {
             val user = FavUser(
                 id,
-                avatar,
                 username,
+                avatar
             )
             mFavUserRepository.insert(user)
         }
     }
-//    fun addToFav(user: FavUser){
-//        mFavUserRepository.insert(user)
-//    }
 
-    fun unFav(id: Int){
-            mFavUserRepository.delete(id)
+    fun unFav(username: String){
+            mFavUserRepository.delete(username)
     }
 
     fun getFavByUsername(username: String): LiveData<List<FavUser>>{

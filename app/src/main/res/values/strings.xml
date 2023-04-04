@@ -4,4 +4,11 @@
     <string name="following">Following</string>
     <string name="search">Search</string>
     <string name="hint">Search User</string>
+    <string name="dark_mode">Dark Mode</string>
+    <string name="day_mode">Day Mode</string>
+    <string name="nama">Harry Malfoy</string>
+    <string name="favorite">Favorite</string>
+    <string name="setting">Setting</string>
+    <string name="nothing_s_here">Nothing\'s here</string>
+    <string name="let_s_search_username">Let\'s search username</string>
 </resources>

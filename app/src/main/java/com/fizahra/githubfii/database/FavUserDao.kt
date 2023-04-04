@@ -14,6 +14,6 @@ interface FavUserDao {
     @Query("SELECT * FROM user WHERE username = :username")
     fun findFavByUsername(username : String): LiveData<List<FavUser>>
 
-    @Query("DELETE FROM user WHERE id = :id")
-    fun delete(id: Int)
+    @Query("DELETE FROM user WHERE username = :username")
+    fun delete(username : String)
 }

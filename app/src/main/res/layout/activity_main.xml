@@ -28,7 +28,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:text="Let's search username"/>
+        android:text="@string/let_s_search_username"/>
 
     <ProgressBar
         android:id="@+id/pb_rv"

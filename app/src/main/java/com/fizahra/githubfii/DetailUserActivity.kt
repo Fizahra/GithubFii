@@ -30,10 +30,8 @@ class DetailUserActivity : AppCompatActivity() {
 
         val dataUser = intent.getParcelableExtra<UserResponse.User>("username")
         val username = dataUser?.login
-        val id = dataUser?.id
         val avatar = dataUser?.avatarUrl
-
-        val user = FavUser()
+        val id = dataUser?.id
 
         print("ini username ak : $username")
         Log.d(username,"ini username ak : $username")
@@ -73,6 +71,7 @@ class DetailUserActivity : AppCompatActivity() {
             }
         }
 
+
         detailViewModel.toastMessage.observe(this) { toastMessage ->
             Toast.makeText(
                 this@DetailUserActivity,
@@ -88,8 +87,8 @@ class DetailUserActivity : AppCompatActivity() {
             tabFollow.setupWithViewPager(vpFollow)
             fabFav.setOnClickListener {
                 if(isFavorite){
-                    if (id != null) {
-                        detailViewModel.unFav(id)
+                    if (username != null) {
+                        detailViewModel.unFav(username)
                     }
                     Toast.makeText(
                         this@DetailUserActivity,

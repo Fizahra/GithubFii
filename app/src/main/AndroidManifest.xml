@@ -14,8 +14,13 @@
         android:theme="@style/Theme.GithubFii"
         tools:targetApi="31">
         <activity
+            android:name=".SettingModeActivity"
+            android:exported="false"
+            android:parentActivityName=".MainActivity"/>
+        <activity
             android:name=".FavoriteUserActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:parentActivityName=".MainActivity" />
         <activity
             android:name=".SplashScreenActivity"
             android:exported="true"

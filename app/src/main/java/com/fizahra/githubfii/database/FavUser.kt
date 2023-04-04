@@ -9,14 +9,14 @@ import kotlinx.parcelize.Parcelize
 @Entity(tableName= "user")
 @Parcelize
 data class FavUser (
-    @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "id")
-    var id: Int? = 0,
+    val id : Int = 0,
 
+    @PrimaryKey(autoGenerate = false)
     @ColumnInfo(name = "username")
-    val username: String? = "",
+    val username: String = "",
 
     @ColumnInfo(name = "avatar")
-    val avatar_url: String? = ""
+    val avatar_url: String? = null
 
 ): Parcelable

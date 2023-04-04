@@ -25,8 +25,8 @@ class FavUserRepository(application : Application) {
         executorService.execute { mFavUserDao.insert(user) }
     }
 
-    fun delete(id: Int){
-        executorService.execute { mFavUserDao.delete(id) }
+    fun delete(username: String){
+        executorService.execute { mFavUserDao.delete(username) }
     }
 
 }
