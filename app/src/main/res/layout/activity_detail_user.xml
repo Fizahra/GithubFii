@@ -81,6 +81,7 @@
             android:gravity="center_vertical"
             android:textSize="14sp"
             tools:text="9 Following" />
+
     </LinearLayout>
 
     <com.google.android.material.tabs.TabLayout
@@ -98,7 +99,9 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tab_follow" />
+        app:layout_constraintTop_toBottomOf="@+id/tab_follow" >
+
+    </androidx.viewpager.widget.ViewPager>
 
     <ProgressBar
         android:id="@+id/pb_det"
@@ -111,5 +114,18 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"/>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab_fav"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_fav"
+        android:backgroundTint="@color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.934"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.974" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

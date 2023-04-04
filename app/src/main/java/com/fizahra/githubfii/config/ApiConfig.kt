@@ -1,7 +1,7 @@
 package com.fizahra.githubfii.config
 
-import androidx.viewbinding.BuildConfig
 import com.fizahra.githubfii.service.ApiService
+import com.fizahra.githubfii.BuildConfig
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -20,7 +20,7 @@ object ApiConfig {
         val authInterceptor = Interceptor { chain ->
             val req = chain.request()
             val requestHeaders = req.newBuilder()
-                .addHeader("Authorization", "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")
+                .addHeader("Authorization", "${BuildConfig.Authorization}")
                 .build()
             chain.proceed(requestHeaders)
         }

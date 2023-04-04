@@ -2,9 +2,11 @@ package com.fizahra.githubfii
 
 import android.app.SearchManager
 import android.content.Context
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
+import android.view.MenuItem
 import android.view.View
 import android.widget.Toast
 import androidx.activity.viewModels
@@ -72,6 +74,16 @@ class MainActivity : AppCompatActivity() {
         })
 
         return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        val id = item.itemId
+        if(id == R.id.menu_fav){
+            val intent = Intent(this, FavoriteUserActivity::class.java)
+            this.startActivity(intent)
+            return true
+        }
+        return super.onOptionsItemSelected(item)
     }
 
     private fun showLoading(isLoading: Boolean) {
